@@ -1,0 +1,109 @@
+
+install! 'cocoapods',
+  :disable_input_output_paths => true,
+  :generate_multiple_pod_projects => true,
+  # :warn_for_unused_master_specs_repo => false,
+  :warn_for_multiple_pod_sources => false,
+  :deterministic_uuids => false
+
+  
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/volcengine/volcengine-specs.git'
+
+def release_pod
+  pod 'OneKit', :subspecs => [
+    'BaseKit',
+    'Defaults',
+    'Database',
+    'MARS/Auth',
+    'Reachability',
+    'Service',
+    'StartUp',
+    'Screenshot'
+  ]
+  pod 'VEH5Kit'
+  pod 'BDHotfix'
+  pod 'TTNetworkManager'
+  pod 'RangersAPM', '>=2.0.0', :subspecs => [
+      'Crash',
+      'WatchDog',
+      'OOM',
+      'LAG',
+      'UserException',
+      'Monitors',
+      'UITrackers',
+      'Hybrid',
+      'MemoryGraph',
+      'Network',
+      'EventMonitor',
+      'CN',
+  ]
+  pod 'RangersAppLog', :subspecs => [
+      'Core',
+      'Host/CN',
+      'OneKit',
+      'UITracker',
+      'Picker',
+      'Log',
+      'Unique'
+    ]
+  # pod 'VEAppUpdateHelper', :path => '../../../VEAppUpdateHelper', :subspecs => [
+  #       'VEUpdateHelper',
+  #       'VEUpdateView'
+  #   ]
+  pod 'VEAppUpdateHelper', :subspecs => [ 
+      'VEUpdateHelper',
+      'VEUpdateView'
+   ]
+end
+
+def ov_pod
+end
+
+def cn_pod
+  
+end
+
+target 'Template_InHouse' do
+  ov_pod
+  release_pod
+  pod 'App/Debug',:path => './../../DevPods/', :inhibit_warnings => false
+end
+
+
+def update_deployment_config(config = nil)
+  return if config.nil?
+  config.build_settings['ENABLE_BITCODE'] = 'NO'
+  if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
+    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    update_deployment_config(config)
+  end
+  
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      update_deployment_config(config)
+    end
+  end
+  ## for generate_multiple_pod_projects = true
+  installer.generated_projects.each do |project|
+    project.build_configurations.each do |config|
+      update_deployment_config(config)
+    end
+    
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        update_deployment_config(config)
+      end
+    end
+  end
+
+end
+
