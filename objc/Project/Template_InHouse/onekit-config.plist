@@ -4,6 +4,11 @@
 <dict>
 	<key>services</key>
 	<dict>
+		<key>update</key>
+		<dict>
+			<key>host</key>
+			<string>xxx</string>
+		</dict>
 		<key>jsbridge_services</key>
 		<dict>
 			<key>auth_enable</key>
