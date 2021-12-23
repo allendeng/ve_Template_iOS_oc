@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>services</key>
+	<dict>
+		<key>jsbridge_services</key>
+		<dict>
+			<key>auth_enable</key>
+			<false/>
+			<key>auth_domain</key>
+			<string>AUTH_DOMAIN</string>
+		</dict>
+		<key>gecko_services</key>
+		<dict>
+			<key>platform_domain</key>
+			<string>PLATFORM_DOMAINS</string>
+			<key>pattern</key>
+			<string>PATTERN</string>
+			<key>gecko_channels</key>
+			<array>
+				<string>gecko_channels</string>
+			</array>
+			<key>gecko_access_key</key>
+			<string>GECKO_ACCESS_KEY</string>
+		</dict>
+		<key>bdhotfix</key>
+		<dict>
+			<key>dist_area</key>
+			<string>cn</string>
+			<key>domain_name</key>
+			<string>plugin-patch-api.bytedance.com</string>
+			<key>debug</key>
+			<true/>
+		</dict>
+		<key>app_update_helper</key>
+		<dict>
+			<key>domain_name</key>
+			<string>PLATFORM_DOMAINS</string>
+		</dict>
+	</dict>
+	<key>version</key>
+	<integer>1</integer>
+	<key>project_info</key>
+	<dict>
+		<key>ak</key>
+		<string>5ac0cdc605d01b06a389f0595fc45aea</string>
+		<key>sk</key>
+		<string>877a9e2d6723741c8a69f0e3bca61abd</string>
+		<key>app_id</key>
+		<string>10002792</string>
+		<key>is_inhouse_app</key>
+		<false/>
+	</dict>
+</dict>
+</plist>
